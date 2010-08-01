@@ -202,7 +202,10 @@ sub tag {
         }
         $tag .= "\n";
     }
-    $tag .= '  '.htmltag('/table') if $checkbox_table;
+    if ($checkbox_table){
+    	$tag .= "\n  ".htmltag('/tr') if $checkbox_col % $self->columns > 0; # Line not filled
+    	$tag .= '  '.htmltag('/table');
+	}
 
     # add an additional tag for our _other field
     $tag .= ' ' . $self->othertag if $self->other;
